@@ -1,0 +1,8 @@
+.toolbar-user-avatar {
+    height: 34px;
+    width: 34px;
+    margin-right: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: map-get($colors , primary-shade);
+}

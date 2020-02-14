@@ -1,0 +1,14 @@
+table {
+    width: 100%;
+
+    th {
+        font-size: 14px !important;
+    }
+}
+
+.no-data-table-message {
+    width: 100%;
+    padding: 14px 24px;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(0,0,0,.12);
+}
