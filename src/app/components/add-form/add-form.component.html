@@ -1,0 +1,71 @@
+<div class="app-layout-header">
+    <div class="app-layout-wrapper">
+        <h1>Create a new form</h1>
+    </div>
+</div>
+<div class="app-layout-wrapper">
+    <form [formGroup]="addFormFormGroup">
+        <mat-card class="form-card">
+            <mat-card-content>
+                <mat-form-field>
+                    <mat-label>Form name</mat-label>
+                    <input matInput type="text" id="nameForm" formControlName="nameForm" required>
+                    <mat-error *ngIf="addFormFormGroup.get('nameForm').hasError('required')">This field is required</mat-error>
+                    <mat-error *ngIf="addFormFormGroup.get('nameForm').hasError('blank')">Form name must have at least one none whitespace character</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Form description</mat-label>
+                    <textarea matInput id="description" formControlName="description" rows="5" required></textarea>
+                    <mat-error *ngIf="addFormFormGroup.get('description').hasError('required')">This field is required</mat-error>
+                    <mat-error *ngIf="addFormFormGroup.get('description').hasError('blank')">Form description must have at least one none whitespace character</mat-error>
+                    <mat-error *ngIf="addFormFormGroup.get('description').hasError('maxlength')">Please do not exceed 250 characters</mat-error>
+                </mat-form-field>
+            </mat-card-content>
+        </mat-card>
+        <div class="questions-container" formArrayName="questions">
+            <mat-card class="form-card" *ngFor="let question of questions.controls; let i = index;" [formGroupName]="i">
+                <mat-card-content>
+                    <div class="remove-question-container">
+                        <mat-icon (click)="onRemoveQuestion(i)">clear</mat-icon>
+                    </div>
+                    <mat-form-field>
+                        <mat-label>Question</mat-label>
+                        <input matInput type="text" id="content" formControlName="content" required>
+                        <mat-error *ngIf="question.get('content').hasError('required')">This field is required</mat-error>
+                        <mat-error *ngIf="question.get('content').hasError('blank')">Question must have at least one none whitespace character</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Question type</mat-label>
+                        <mat-select id="questionType" formControlName="questionType" required (selectionChange)="onQuestionTypeSelectionChange(i)">
+                            <mat-option value="QCM">Multiple choices question</mat-option>
+                            <mat-option value="normal">Open response question</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="question.get('questionType').hasError('required')">This field is required</mat-error>
+                    </mat-form-field>
+                    <div class="choices-container" *ngIf="question.get('questionType').value === 'QCM'" formArrayName="choices">
+                        <p>Choices</p>
+                        <div class="choice-container" *ngFor="let choice of getQuestionChoices(i).controls; let j = index;" [formGroupName]="j">
+                            <div class="choice-number">{{ j + 1 }}.</div>
+                            <div class="choice-input-container">
+                                <mat-form-field>
+                                    <input matInput placeholder="Choice content" type="text" id="choiceContent" formControlName="choiceContent" required>
+                                    <mat-error *ngIf="choice.get('choiceContent').hasError('required')">This field is required</mat-error>
+                                    <mat-error *ngIf="choice.get('choiceContent').hasError('blank')">Choice content must have at least one none whitespace character</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="remove-choice"><mat-icon (click)="onRemoveChoice(i,j)">clear</mat-icon></div>
+                        </div>
+                        <button mat-button color="primary" (click)="onAddChoice(i)">Add another choice</button>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <mat-card matRipple class="clickable-card add-question-clickable-card" (click)="onAddQuestion()">
+            <mat-icon>add</mat-icon>
+            <span>Add a question</span>
+        </mat-card>
+        <div class="form-actions-container">
+            <button mat-raised-button color="primary" [disabled]="addFormFormGroup.invalid" (click)="onAddForm()">SUBMIT</button>
+        </div>
+    </form>
+</div>

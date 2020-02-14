@@ -1,0 +1,23 @@
+.app-layout-header {
+
+    .app-layout-wrapper {
+
+        h1 {
+            margin-bottom: 1em !important;
+        }
+    }
+}
+
+mat-card+mat-card {
+    margin-top: 24px;
+}
+
+.submit-button-container {
+    width: 100%;
+    padding: 24px 0px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: flex-end;
+}
