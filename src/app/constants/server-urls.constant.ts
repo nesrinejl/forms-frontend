@@ -14,7 +14,8 @@ export const API_ENDPOINTS = {
         BASE_ENDPOINT: '/forms'
     },
     FORM_SUBMISSIONS_RESOURCE_ENDPOINTS: {
-        BASE_ENDPOINT: '/form-submissions'
+        BASE_ENDPOINT: '/form-submissions',
+        SUBMITTED_FORMS_ENDPOINT: '/form-submissions/submitted'
     }
 };
 

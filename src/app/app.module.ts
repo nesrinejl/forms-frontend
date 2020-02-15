@@ -12,6 +12,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { AppLayoutComponent } from './components/app-layout/app-layout.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { FormShareLinkDialogComponent } from './components/form-share-link-dialog/form-share-link-dialog.component';
 import { AddFormComponent } from './components/add-form/add-form.component';
 import { FormComponent } from './components/form/form.component';
 
@@ -24,11 +25,13 @@ import { FormComponent } from './components/form/form.component';
         ConfirmationDialogComponent,
         AppLayoutComponent,
         DashboardComponent,
+        FormShareLinkDialogComponent,
         AddFormComponent,
         FormComponent
     ],
     entryComponents: [
-        ConfirmationDialogComponent
+        ConfirmationDialogComponent,
+        FormShareLinkDialogComponent
     ],
     imports: [
         BrowserModule,

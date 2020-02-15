@@ -16,6 +16,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRippleModule } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { MatListModule } from '@angular/material/list';
         MatMenuModule,
         MatDialogModule,
         MatRippleModule,
-        MatListModule
+        MatListModule,
+        MatTabsModule
     ],
     exports: [
         ReactiveFormsModule,
@@ -53,7 +55,8 @@ import { MatListModule } from '@angular/material/list';
         MatMenuModule,
         MatDialogModule,
         MatRippleModule,
-        MatListModule
+        MatListModule,
+        MatTabsModule
     ],
     providers: [
         { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 5000, horizontalPosition: 'end', verticalPosition: 'top' } }
