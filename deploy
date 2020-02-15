@@ -1,4 +1,4 @@
 #!/bin/sh
 
-ng build --prod --base-href=https://nesrinejl.github.io/forms/
+ng build --prod --base-href "https://nesrinejl.github.io/forms/"
 npx angular-cli-ghpages --no-silent --name="nesrinejl" --email="jlnesrine@gmail.com" --dir="dist/forms-frontend"
