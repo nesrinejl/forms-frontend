@@ -1,0 +1,19 @@
+<div class="app-layout-main-container">
+    <mat-toolbar color="primary" role="toolbar" class="mat-elevation-z6">
+        <div *ngIf="displayLoader" class="toolbar-overlay"></div>
+        <span class="home" (click)="navigateToDashboard()">Forms</span>
+        <span class="fill-space"></span>
+        <mat-menu #userMenu="matMenu">
+            <button mat-menu-item (click)="onSignOut()">
+                <mat-icon>lock</mat-icon>
+                <span>Sign out</span>
+            </button>
+        </mat-menu>
+        <img [matMenuTriggerFor]="userMenu" class="toolbar-user-avatar" src="assets/imgs/user-avatar.png">
+    </mat-toolbar>
+    <mat-progress-bar *ngIf="displayLoader" mode="indeterminate" color="accent" class="mat-elevation-z6 app-layout-progress-bar"></mat-progress-bar>
+    <div *ngIf="displayLoader" class="loader-overlay"></div>
+    <div class="app-layout-content">
+        <router-outlet></router-outlet>
+    </div>
+</div>

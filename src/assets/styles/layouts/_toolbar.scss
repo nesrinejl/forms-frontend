@@ -1,0 +1,13 @@
+mat-toolbar {
+    z-index: 5;
+    position: relative;
+    min-height: 54px !important;
+
+    .home {
+        cursor: pointer;
+    }
+
+    .fill-space {
+        flex: 1 1 auto;
+    }
+}

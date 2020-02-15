@@ -1,0 +1,20 @@
+<div class="dialog-header-container">
+
+    <h2 class="dialog-title">Form share link</h2>
+
+</div>
+
+<div class="dialog-content-container">
+    <mat-form-field>
+        <input matInput type="text" id="formShareLink" [value]="formShareLink">
+    </mat-form-field>
+</div>
+
+<div class="dialog-actions-container">
+
+    <div class="actions right">
+        <button mat-button [mat-dialog-close]="false">DONE</button>
+        <button mat-raised-button color="primary" (click)="onCopyFormShareLink()" cdkFocusInitial>COPY</button>
+    </div>
+
+</div>

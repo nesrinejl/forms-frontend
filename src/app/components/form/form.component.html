@@ -1,0 +1,64 @@
+<div class="progress-spinner-container" *ngIf="isLoading">
+    <mat-spinner [diameter]="50" [strokeWidth]="4"></mat-spinner>
+</div>
+<div class="app-layout-header" *ngIf="!isLoading">
+    <div class="app-layout-wrapper">
+        <h1>{{ form.nameForm }}</h1>
+        <p>{{ form.description }}</p>
+    </div>
+</div>
+<div class="app-layout-wrapper" *ngIf="!isLoading">
+    <div *ngIf="!isFormOwner">
+        <mat-card class="form-card" *ngFor="let question of form.questions; let i = index;">
+            <mat-card-content>
+                <form [formGroup]="responsesFormGroups[i]">
+                    <p>{{ question.content }}</p>
+                    <mat-form-field *ngIf="question.questionType === 'normal'">
+                        <input matInput placeholder="Your response" type="text" id="content" formControlName="content" required>
+                        <mat-error *ngIf="responsesFormGroups[i].get('content').hasError('required')">This field is required</mat-error>
+                        <mat-error *ngIf="responsesFormGroups[i].get('content').hasError('blank')">Response content must have at least one none whitespace character</mat-error>
+                    </mat-form-field>
+                    <mat-list *ngIf="question.questionType === 'QCM'">
+                        <mat-list-item *ngFor="let choice of question.choices">
+                            <mat-checkbox color="primary" (change)="onChoiceSelectionChange(i, choice._id, $event)">{{ choice.choiceContent }}</mat-checkbox>
+                        </mat-list-item>
+                    </mat-list>
+                </form>
+            </mat-card-content>
+        </mat-card>
+        <div class="submit-button-container">
+            <button mat-raised-button color="primary" (click)="onSubmitResponses()">SUBMIT</button>
+        </div>
+    </div>
+    <div *ngIf="isFormOwner">
+        <h2>Form submissions: {{ formStatistic.formSubmissionsCount ? formStatistic.formSubmissionsCount : 0 }}</h2>
+        <mat-card class="form-card" *ngFor="let question of formStatistic.questions; let i = index;">
+            <mat-card-content>
+                <h3>{{ question.content }}</h3>
+                <div *ngIf="question.questionType === 'normal'">
+                    <p>Responses:</p>
+                    <mat-list class="responses-list">
+                        <mat-list-item *ngFor="let response of question.responses; let j = index;">{{ (j + 1) + '. ' + response }}</mat-list-item>
+                    </mat-list>
+                </div>
+                <div *ngIf="question.questionType === 'QCM'">
+                    <p>Choices:</p>
+                    <div class="choices-pie-chart-container">
+                        <ngx-charts-pie-chart
+                            scheme="cool"
+                            [view]="[300, 300]"
+                            [results]="getFormatedPieChartData(question.choices)"
+                            [legend]="true"
+                            legendTitle=""
+                            legendPosition="below"
+                            [doughnut]="true"
+                            [arcWidth]="0.5"
+                            [animations]="false"
+                            >
+                        </ngx-charts-pie-chart>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

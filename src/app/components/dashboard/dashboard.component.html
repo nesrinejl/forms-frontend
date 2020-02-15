@@ -1,0 +1,61 @@
+<div class="app-layout-wrapper">
+    <mat-tab-group mat-stretch-tabs (selectedIndexChange)="loadForms($event)">
+        <mat-tab label="Your forms">
+            <div class="tab-content-container">
+                <div class="progress-spinner-container" *ngIf="isLoading">
+                    <mat-spinner [diameter]="50" [strokeWidth]="4"></mat-spinner>
+                </div>
+                <div *ngIf="!isLoading">
+                    <div class="placeholder" *ngIf="!forms || forms.length <= 0">
+                        <p>You have no forms yet! <a (click)="onCreateNewForm()">Create a new form.</a></p>
+                    </div>
+                    <div class="cards-container" *ngIf="forms && forms.length > 0">
+                        <div class="card-container">
+                            <mat-card matRipple class="create-new-form-button-card clickable-card" (click)="onCreateNewForm()">
+                                <div class="button-card-content">
+                                    <mat-icon>add</mat-icon>
+                                    <p>Create a new form</p>
+                                </div>
+                            </mat-card>
+                        </div>
+                        <div class="card-container" *ngFor="let form of forms; let i = index;">
+                            <mat-card matRipple class="displayed-form-card clickable-card" (click)="navigateToFormDetails(form._id)">
+                                <h3>{{ form.nameForm }}</h3>
+                                <div class="form-menu-button-container" (click)="$event.stopPropagation()" [matMenuTriggerFor]="formMenu" [matMenuTriggerData]="{ formIndex: i }">
+                                    <mat-icon>more_vert</mat-icon>
+                                </div>
+                                <mat-menu #formMenu="matMenu">
+                                    <ng-template matMenuContent let-formIndex="formIndex">
+                                        <button mat-menu-item (click)="onGetFormShareLink(formIndex)">
+                                            <mat-icon>link</mat-icon>
+                                            <span>Get share link</span>
+                                        </button>
+                                    </ng-template>
+                                </mat-menu>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Your submitted forms">
+            <div class="tab-content-container">
+                <div class="progress-spinner-container" *ngIf="isLoading">
+                    <mat-spinner [diameter]="50" [strokeWidth]="4"></mat-spinner>
+                </div>
+                <div *ngIf="!isLoading">
+                    <div class="placeholder" *ngIf="!forms || forms.length <= 0">
+                        <p>You have no submitted forms yet!</p>
+                    </div>
+                    <div class="cards-container" *ngIf="forms && forms.length > 0">
+                        <div class="card-container" *ngFor="let form of forms; let i = index;">
+                            <mat-card matRipple class="displayed-form-card clickable-card">
+                                <h3>{{ form.nameForm }}</h3>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>
