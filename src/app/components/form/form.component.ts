@@ -141,7 +141,7 @@ export class FormComponent implements OnInit {
                 invalid = !RESPONSE.content || RESPONSE.content.trim() === '';
             } else if (RESPONSE.responseType === QuestionResponseTypesEnum.MULTIPLE_CHOICE) {
                 RESPONSE.choiceResponses = this.responsesFormGroups[index].get('choiceResponses').value;
-                invalid = !RESPONSE.content || RESPONSE.content.length <= 0;
+                invalid = !RESPONSE.choiceResponses || RESPONSE.choiceResponses.length <= 0;
             }
             FORM_SUBMISSION.responses.push(RESPONSE);
         });
